@@ -70,7 +70,8 @@ class GdbserverTarget(Target):
         
     def start(self):
         #TODO: Handle timeout
-        if self._verbose: log.info("Trying to connect to target gdb server at %s:%d", self._sockaddress[0], self._sockaddress[1])
+        if self._verbose:
+            log.info("Trying to connect to target gdb server at %s:%d", self._sockaddress[0], self._sockaddress[1])
         self._gdb_interface = GdbDebugger(gdb_executable = self.gdb_exec, cwd = ".", additional_args = self.additional_args )
         self._gdb_interface.set_async_message_handler(self.handle_gdb_async_message)
         self._gdb_interface.connect(("tcp", self._sockaddress[0], "%d" % self._sockaddress[1]))
